@@ -58,7 +58,31 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  // create event handler on each key
+  // when key is pressed, play audio sound with corresponding data-key attribute
 
+  window.addEventListener('keydown', (e) => {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const div = document.querySelector(`div[data-key="${e.keyCode}"]`);
+
+    audio.currentTime = 0;
+    audio.play();
+
+    div.classList.toggle('playing');
+
+    // setTimeout(() => {
+    //   div.classList.toggle('playing');
+    // }, 100);
+
+    function removeTransition(e) {
+      e.target.classList.remove('playing');
+    }
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  })
+
+  
 </script>
 
 
